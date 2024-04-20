@@ -4,22 +4,22 @@ This is the backend API for the Meme App project. It provides the necessary endp
 
 ## Prerequisites
 
-- Node.js (version X.X.X)
-- npm (version X.X.X)
-- MongoDB (version X.X.X)
+- Node.js (version 21.7.3)
+- npm (version 10.5.0)
+- PostgreSQL (version 16)
 
 ## Getting Started
 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/meme-app-api.git
+    git clone https://github.com/sammyklan3/meme-app.git
     ```
 
 2. Install the dependencies:
 
     ```bash
-    cd meme-app-api
+    cd meme-app
     npm install
     ```
 
