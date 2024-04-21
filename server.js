@@ -3,6 +3,7 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const cors = require('cors');
 const path = require('path');
+const passport = require("./config/passport-config");
 const syncDatabase = require("./middleware/syncDb");
 const app = express();
 
@@ -26,6 +27,7 @@ if (cluster.isMaster) {
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
+    app.use(passport.initialize());
 
     app.use("/api", require("./routes/routes"));
 

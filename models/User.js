@@ -10,7 +10,7 @@ User.init({
     autoIncrement: true,
   },
   userId: {
-    type: DataTypes.UUID,
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
@@ -45,3 +45,5 @@ User.init({
   tableName: "users", // Set the table name to 'users'
   timestamps: false,
 });
+
+module.exports = User;
