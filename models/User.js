@@ -1,18 +1,14 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require("../config/sequelize"); // Import the initialized Sequelize instance
+const Token = require("./Token");
 
-class User extends Model {}
+class User extends Model { }
 
 User.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-  },
-  userId: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
   },
   username: {
     type: DataTypes.STRING,
@@ -39,11 +35,24 @@ User.init({
       isNumeric: true,
     },
   },
+  created_at: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  },
 }, {
   sequelize,
   modelName: 'User',
   tableName: "users", // Set the table name to 'users'
   timestamps: false,
 });
+
+// Define associations
+User.hasMany(Token, { onDelete: 'CASCADE' }); // When a user is deleted, associated tokens are also deleted
+
+// Sequelize hook to handle the deletion of associated tokens when a user record is deleted
+User.addHook('beforeDestroy', (user, options) => {
+  return Token.destroy({ where: { UserId: user.userId } });
+});
+
 
 module.exports = User;

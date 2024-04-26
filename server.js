@@ -22,6 +22,12 @@ if (cluster.isMaster) {
 } else {
     console.log(`Worker ${process.pid} started`);
 
+    // Show received requests
+    app.use((req, res, next) => {
+        console.log(`Request received at ${new Date()}`);
+        next();
+    });
+
     // Middleware
     app.use(express.static(path.join(__dirname, "public")));
     app.use(cors());
